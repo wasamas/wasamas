@@ -11,14 +11,11 @@ via. https://github.com/tdtds/massr
 
 ## usage
 
-set your Twitter API-key to `docker-compose.yml` .
+set your Twitter API-key to `.env` .
 
 ```
-services:
-  massr:
-    environment:
-      - TWITTER_CONSUMER_ID=YOUR_TWITTER_API_KEY
-      - TWITTER_CONSUMER_SECRET=YOUR_TWITTER_API_SECRET
+TWITTER_CONSUMER_ID=YOUR_TWITTER_API_KEY
+TWITTER_CONSUMER_SECRET=YOUR_TWITTER_API_SECRET
 ```
 
 make directory for mongodb datastore.

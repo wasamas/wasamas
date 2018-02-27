@@ -8,10 +8,9 @@ services:
       - LANG=ja_JP.utf8
       - TZ=Asia/Tokyo
       - RACK_ENV=production
-      - TWITTER_CONSUMER_ID=YOUR_TWITTER_API_KEY
-      - TWITTER_CONSUMER_SECRET=YOUR_TWITTER_API_SECRET
-      - MONGODB_URI=mongodb://mongodb:27017
+      - MONGODB_URI=mongodb://mongodb:27017/massr
       - MEMCACHE_SERVERS=memcached:11211
+    env_file: .env
     ports:
       - 9393:9393
     depends_on:

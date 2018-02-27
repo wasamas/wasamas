@@ -1,0 +1,12 @@
+---
+- hosts: web
+  become: yes
+  tasks:
+    - name: be sure os standard packages installed
+      apt: name={{ item }} state=installed
+      with_items:
+        - nginx
+    - name: be sure services are running
+      service: name={{ item }} state=started enabled=yes
+      with_items:
+        - nginx

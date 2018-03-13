@@ -8,6 +8,8 @@
       apt_repository: repo="deb [arch=amd64] https://download.docker.com/linux/debian stretch stable"
     - name: be updated apt cache
       apt: update_cache=yes
+    - name: be sure nginx configurstion copied
+      copy: src=nginx.conf dest=/etc/nginx/sites-available/default owner=root group=root mode=0644
     - name: be sure os standard packages installed
       apt: name={{ item }} state=installed
       with_items:

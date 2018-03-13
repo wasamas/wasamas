@@ -1,4 +1,4 @@
-FROM ruby:2.4.3-stretch
+FROM ruby:2.5.0-stretch
 MAINTAINER hide32767 <hide.in@gmail.com>
 
 RUN : \

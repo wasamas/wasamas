@@ -10,10 +10,6 @@ services:
     env_file: .env
     ports:
       - 9393:9393
-    logging:
-      driver: gcplogs
-      options:
-        gcp-project: "wasamas-test"
     depends_on:
       - mongodb
       - memcached

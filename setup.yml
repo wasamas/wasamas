@@ -6,6 +6,8 @@
       apt_key: url=https://download.docker.com/linux/debian/gpg
     - name: be sure Docker repository installed
       apt_repository: repo="deb [arch=amd64] https://download.docker.com/linux/debian stretch stable"
+    - name: be sure docker daemon settings copied
+      copy: src=daemon.json dest=/etc/docker/daemon.json owner=root group=root mode=0644
     - name: be updated apt cache
       apt: update_cache=yes
     - name: be sure nginx configurstion copied

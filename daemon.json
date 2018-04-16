@@ -1,0 +1,6 @@
+{
+	"log-driver": "gcplogs",
+	"log-opts": {
+		"gcp-meta-name": "wasamas"
+	}
+}

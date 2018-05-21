@@ -1,0 +1,24 @@
+---
+- hosts: web
+  become: yes
+  tasks:
+    - name: be updated apt cache
+      apt: update_cache=yes
+    - name: be sure nginx configurstion copied
+      copy: src=nginx.conf dest=/etc/nginx/sites-available/wasamas owner=root group=root mode=0644
+    - name: be sure os standard packages installed
+      apt: name={{ item }} state=installed
+      with_items:
+        - nginx
+        - ca-certificates
+        - curl
+        - gnupg2
+        - software-properties-common
+    - name: be sure os special packages installed
+      apt: name={{ item }} default_release=stretch-backports state=installed
+      with_items:
+        - python-certbot-nginx
+    - name: be sure services are running
+      service: name={{ item }} state=started enabled=yes
+      with_items:
+        - nginx

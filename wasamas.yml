@@ -6,30 +6,15 @@
       apt_key: url=https://download.docker.com/linux/debian/gpg
     - name: be sure Docker repository installed
       apt_repository: repo="deb [arch=amd64] https://download.docker.com/linux/debian stretch stable"
-    - name: be sure docker daemon settings copied
-      copy: src=daemon.json dest=/etc/docker/daemon.json owner=root group=root mode=0644
     - name: be updated apt cache
       apt: update_cache=yes
-    - name: be sure nginx configurstion copied
-      copy: src=nginx.conf dest=/etc/nginx/sites-available/default owner=root group=root mode=0644
     - name: be sure os standard packages installed
       apt: name={{ item }} state=installed
       with_items:
-        - nginx
         - apt-transport-https
-        - ca-certificates
-        - curl
-        - gnupg2
-        - software-properties-common
         - docker-ce
-    - name: be sure os special packages installed
-      apt: name={{ item }} default_release=stretch-backports state=installed
-      with_items:
-        - python-certbot-nginx
-    - name: be sure services are running
-      service: name={{ item }} state=started enabled=yes
-      with_items:
-        - nginx
+    - name: be sure docker daemon settings copied
+      copy: src=daemon.json dest=/etc/docker/daemon.json owner=root group=root mode=0644
     - name: be sure docker-compose installed
       get_url: url='https://github.com/docker/compose/releases/download/1.19.0/docker-compose-Linux-x86_64' dest=/usr/local/bin/docker-compose owner=root group=root mode=0755
     - name: be sure massr installed

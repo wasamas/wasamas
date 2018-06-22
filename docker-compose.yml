@@ -1,7 +1,7 @@
 version: '3'
 services:
   massr:
-    image: tdtds/massr
+    image: tdtds/massr:wasamas
     container_name: "massr"
     environment:
       - TZ=Asia/Tokyo

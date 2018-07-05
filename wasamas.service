@@ -1,0 +1,24 @@
+[Unit]
+Description=wasamas commnnication place on massr
+Documentation=https://github.com/wasamas/wasamas.net
+Requires=docker.service
+After=docker.service
+
+[Service]
+Type=simple
+Environment=COMPOSE_FILE=/opt/massr/docker-compose.yml
+
+ExecStartPre=-/usr/local/bin/docker-compose -f ${COMPOSE_FILE} kill
+ExecStartPre=-/usr/local/bin/docker-compose -f ${COMPOSE_FILE} rm -v -f
+ExecStartPre=-/usr/local/bin/docker-compose -f ${COMPOSE_FILE} down
+ExecStart=/usr/local/bin/docker-compose -f ${COMPOSE_FILE} up --force-recreate --abort-on-container-exit
+
+ExecStop=/usr/local/bin/docker-compose -f ${COMPOSE_FILE} stop
+ExecStopPost=-/usr/local/bin/docker-compose -f ${COMPOSE_FILE} rm -v -f
+ExecStopPost=-/usr/local/bin/docker-compose -f ${COMPOSE_FILE} down
+
+Restart=always
+RestartSec=180s
+
+[Install]
+WantedBy=multi-user.target

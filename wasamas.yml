@@ -21,3 +21,11 @@
       git: repo=https://github.com/wasamas/wasamas.git dest=/opt/massr clone=yes
     - name: be sure .env of massr copied
       copy: src=.env dest=/opt/massr/.env owner=root group=root mode=0600
+    - name: be sure wasamas.service copied
+      copy: src=wasamas.service dest=/etc/systemd/system/wasamas.service owner=root group=root mode=0644
+    - name: restart wasamas.service
+      systemd:
+        name: wasamas.service
+        state: restarted
+        daemon_reload: yes
+        enabled: yes
